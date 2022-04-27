@@ -27,7 +27,6 @@ bbb-blink-python = {editable = true, path = "."}
 [packages]
 python-json-logger = "==2.0.2"
 #Adafruit-BBIO = "*"
-bbb-blink-python = {editable = true, path = "."}
 
 [requires]
 python_version = "3.10"
