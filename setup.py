@@ -7,24 +7,25 @@ from os.path import basename, dirname, splitext
 
 from setuptools import find_namespace_packages, setup  # type: ignore
 
-PROJECT_NAME: str = ""
+PROJECT_NAME = "bbb-blink-python"
+PYTHON_VERSION = (3, 10)
 
-if sys.version_info < (3, 7):
-    raise RuntimeError(f"{PROJECT_NAME} requires Python 3.7+")
+if sys.version_info < PYTHON_VERSION:
+    raise RuntimeError(f"{PROJECT_NAME} requires Python {'.'.join([str(x) for x in PYTHON_VERSION])}+")
 
 HERE = pathlib.Path(__file__).parent
-IS_GIT_REPO: bool = (HERE / ".git").exists()
+IS_GIT_REPO = (HERE / ".git").exists()
 
-base_dir: str = dirname(__file__)
+base_dir = dirname(__file__)
 
-__pkginfo__: typing.Dict[str, typing.Any] = {}
+__pkginfo__ = {}
 exec(
     (HERE / "__pkginfo__.py").read_text("utf-8"), __pkginfo__
 )  # pylint: disable=exec-used
 
-version: str = str(__pkginfo__.get("version", ""))
+version = str(__pkginfo__.get("version", ""))
 
-long_description: str = (HERE / "README.md").read_text("utf-8").strip()
+long_description = (HERE / "README.md").read_text("utf-8").strip()
 
 setup(
     author="Steve Cirelli",
@@ -45,7 +46,7 @@ setup(
     install_requires=[
     ],
     setup_requires=["pytest-runner", "behave"],
-    python_requires=">=3.8",
+    python_requires=f">={'.'.join([str(x) for x in PYTHON_VERSION])}",
     zip_safe=False,
     keywords="",
     license="MIT",
@@ -55,6 +56,6 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Natural Language :: English",
         "Operating System :: OS Independent",
-        "Programming Language :: Python :: 3",
+        f"Programming Language :: Python :: {PYTHON_VERSION[0]}",
     ],
 )
