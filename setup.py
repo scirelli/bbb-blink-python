@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import pathlib
 import sys
-import typing
 from glob import glob
 from os.path import basename, dirname, splitext
 
@@ -11,7 +10,9 @@ PROJECT_NAME = "bbb-blink-python"
 PYTHON_VERSION = (3, 10)
 
 if sys.version_info < PYTHON_VERSION:
-    raise RuntimeError(f"{PROJECT_NAME} requires Python {'.'.join([str(x) for x in PYTHON_VERSION])}+")
+    raise RuntimeError(
+        f"{PROJECT_NAME} requires Python {'.'.join([str(x) for x in PYTHON_VERSION])}+"
+    )
 
 HERE = pathlib.Path(__file__).parent
 IS_GIT_REPO = (HERE / ".git").exists()
@@ -43,8 +44,7 @@ setup(
     include_package_data=True,
     test_suite="tests.unit",
     dependency_links=[],
-    install_requires=[
-    ],
+    install_requires=[],
     setup_requires=["pytest-runner", "behave"],
     python_requires=f">={'.'.join([str(x) for x in PYTHON_VERSION])}",
     zip_safe=False,
