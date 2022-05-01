@@ -1,26 +1,12 @@
-#!/usr/bin/python
-# //////////////////////////////////////
-# 	blink.py
-# 	Blinks one LED wired to P9_14.
-# 	Wiring:	P9_14 connects to the plus lead of an LED.  The negative lead of the
-# 			LED goes to a 220 Ohm resistor.  The other lead of the resistor goes
-# 			to ground.
-# 	Setup:
-# 	See:
-# //////////////////////////////////////
-import time
+#!/usr/bin/python3
+from morse_code_writer.string_writer import StringMorseLEDWriter
+from morse_messages.morse_code.morse_code import internationalMorseCode
 
-import Adafruit_BBIO.GPIO as GPIO  # type: ignore
 
-from morse_messages.morse_code.morse_code import InternationalMorseCode
+def main() -> None:
+    w = StringMorseLEDWriter("P9_14", internationalMorseCode)
+    w.write(bytearray("Hello world", encoding="utf-8"))
 
-out = "P9_14"
 
-GPIO.setup(out, GPIO.OUT)
-TIME_UNIT_S = 0.5
-
-while True:
-    GPIO.output(out, GPIO.HIGH)
-    time.sleep(InternationalMorseCode.UNIT * TIME_UNIT_S)
-    GPIO.output(out, GPIO.LOW)
-    time.sleep(0.5)
+if __name__ == "__main__":
+    main()
