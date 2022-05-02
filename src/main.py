@@ -5,7 +5,7 @@ from morse_messages.morse_code.morse_code import internationalMorseCode
 
 def main() -> None:
     w = StringMorseLEDWriter("P9_14", internationalMorseCode)
-    w.write(bytearray("Hello world", encoding="utf-8"))
+    print(w.write(bytearray("Hello world", encoding="utf-8")))
 
 
 if __name__ == "__main__":

@@ -83,11 +83,12 @@ class StringMorseLEDWriter(Writer):
 
     def __init__(self, pin: str, language: MorseCode):
         self.pin = pin
+        GPIO.setup(pin, GPIO.OUT)
         self.language = language
 
     def write(self, p: bytearray) -> int:
         bytecount = 0
-        for char in p.decode().strip():
+        for char in p.decode().strip().upper():
             if char >= "A" and char <= "Z" or char >= "0" and char <= "9":
                 bytecount += 1
                 self._write_letter(char)

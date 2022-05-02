@@ -7,6 +7,7 @@
 # 5. The space between words is seven units.
 # ###########################################################
 from dataclasses import dataclass, field
+from typing import Tuple
 
 
 @dataclass(frozen=True)
@@ -24,7 +25,7 @@ class MorseCode:
     Codes should list numbers first then alphabet
     """
 
-    code: tuple[str, ...] = field(default_factory=tuple)
+    code: Tuple[str, ...] = field(default_factory=tuple)
     time: Timing = field(default_factory=lambda: Timing(0, 0, 0, 0, 0))
 
     def encode_char(self, c: str) -> str:
