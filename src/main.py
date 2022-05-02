@@ -2,11 +2,29 @@
 from morse_code_writer.string_writer import StringMorseLEDWriter
 from morse_messages.morse_code.morse_code import internationalMorseCode
 
+w = StringMorseLEDWriter("P9_14", internationalMorseCode)
 
-def main() -> None:
-    w = StringMorseLEDWriter("P9_14", internationalMorseCode)
-    print(w.write(bytearray("Hello world", encoding="utf-8")))
+
+def main(arg: str = "Hello world") -> None:
+    print(w.write(bytearray(arg, encoding="utf-8")))
 
 
 if __name__ == "__main__":
-    main()
+    import argparse
+    from sys import stdin
+
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument(
+        "--file",
+        default=stdin,
+        type=argparse.FileType("r"),
+        nargs="?",
+        help="",
+    )
+
+    args = parser.parse_args()
+    for line in args.file.readline():
+        if "Exit" == line.rstrip():
+            break
+        main(line)
