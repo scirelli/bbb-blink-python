@@ -6,6 +6,7 @@ w = StringMorseLEDWriter("P9_14", internationalMorseCode)
 
 
 def main(arg: str = "Hello world") -> None:
+    print(f"Echo: {arg}")
     print(w.write(bytearray(arg, encoding="utf-8")))
 
 
@@ -24,7 +25,7 @@ if __name__ == "__main__":
     )
 
     args = parser.parse_args()
-    for line in args.file.readline():
+    for line in args.file.readlines():
         if "Exit" == line.rstrip():
             break
-        main(line)
+        main(line.strip())
